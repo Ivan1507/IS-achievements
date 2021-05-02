@@ -1,0 +1,16 @@
+{{#if message}}
+  <h3>{{message}}</h3>
+{{/if}}
+<form action="/auth/login" method="post">
+        <div>
+            <label for="login">Enter you login:</label>
+            <input id="login" name="login">
+        </div>
+        <div>
+            <label for="password">Enter you password:</label>
+            <input type='password' id="password" name="password">
+        </div>
+        <div>
+            <button type="submit" class="btn">Submit</button>
+        </div>
+    </form>

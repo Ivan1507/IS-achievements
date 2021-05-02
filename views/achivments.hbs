@@ -1,0 +1,22 @@
+<head>
+  <link href="styles.css" rel="stylesheet">
+</head>
+<h1>List of Achivments</h1>
+{{#if Achivs.length}}
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Date</th>
+      <th>Description</th>
+    </tr>
+    {{#each Achivs}}
+      <tr>
+        <th><a href="/achivments/{{achiv_id}}">{{name}}</a></th>
+        <th>{{date}}</th>
+        <th>{{description}}</th>
+      </tr>
+    {{/each}}
+  </table>
+{{else}}
+  <p>Here no Achivments!!!</p>
+{{/if}}
