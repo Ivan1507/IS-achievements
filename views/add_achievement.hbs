@@ -1,0 +1,26 @@
+
+{{# if errs.length}}
+  <ul>
+    {{#each errs}}
+      <li>
+        <p class="card-panel teal lighten-2">{{msg}}</p>
+      </li>
+    {{/each}}
+
+  </ul>
+{{/if}}
+
+  <h1>{{title}}</h1>
+  <form action="/achievements/add" method="POST">
+    <input type="hidden" name="id"  />
+    <label for="name">Название</label><br>
+    <input name="name"  class="field" /><br><br>
+    <label>Дата </label><br>
+    <input name="date" type="date"  class="field" /><br><br>
+    <label>Тип достижения </label><br>
+    <input name="type"  class="field" /><br><br>
+    <label>Описание</label><br>
+    <input name="description"  class="field" /><br><br>
+    <input type="submit" class="btn" value="Отправить" />
+  </form>
+

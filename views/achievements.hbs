@@ -1,0 +1,30 @@
+<h1>Список достижений</h1>
+<button class="btn btn-success"><a href="/achievements/add">Добавить</a></button>
+<br><br>
+{{#if Achievements.length}}
+  <table>
+    <tr>
+      <th>Название</th>
+      <th>Дата</th>
+      <th>Описание</th>
+      <th>Операция</th>
+    </tr>
+    {{#each Achievements}}
+      <tr>
+        <th><a href="/achievements/edit/{{achiv_id}}">{{name}}</a></th>
+        <th>{{date}}</th>
+        <th>{{description}}</th>
+        <th>
+        <form action="/achievements/delete/{{achiv_id}}" method="POST" style="display:inline;">
+          <input onclick="const c=confirm('Вы действительно хотите удалить эту запись?')
+           if(!c) return event.preventDefault() " class='btn btn-danger' type="submit" value="Удалить" />
+        </form>
+        </th>
+      </tr>
+    {{/each}}
+  </table>
+{{else}}
+  <p>Пока нет достижений!!!</p>
+{{/if}}
+
+

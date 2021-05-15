@@ -3,13 +3,9 @@ const mysql=require('mysql2')
 const jwt=require('jsonwebtoken')
 const bcrypt=require('bcryptjs')
 require('dotenv').config()
+const config=require('../config/db.config')
 
-const connection = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    database: "spr",
-    password: "кщще"
-});
+const connection = mysql.createConnection(config);
 
 
 exports.login=(req,res)=>{
@@ -18,7 +14,8 @@ exports.login=(req,res)=>{
 
         if(!login||!password){
             res.status(400).render('login',{
-                message:"Login or password is empty!"
+                message:"Пароль или логин пустой!",
+                isLogout:true
             })
             return
         }
@@ -27,12 +24,14 @@ exports.login=(req,res)=>{
             console.log(results)
             if(results<1){
                res.status(401).render('login',{
-                   message:"No such user!"
+                   message:"Пользователь с таким логином отсутствует!",
+                   isLogout:true
                })
            }
         else if(!(await bcrypt.compare(password,results[0].password ))){
                 res.status(401).render('login',{
-                    message:"Wrong password!"
+                    message:"Неправильно набран пароль!",
+                    isLogout:true
                 })
             }
         else{
@@ -65,14 +64,19 @@ exports.login=(req,res)=>{
 
 exports.register=(req,res)=>{
 const {login,password}=req.body;
-console.log(login)
+if(login.length<5||password.length<5){
+    res.render('register',{
+        error:"Логин и пароль должны быть длинее 4 символов!"
+    })
+    return
+}
 connection.query('select login from spr.user where login=?',[login], async (err,result)=>{
     if(err){
         console.log(err)
     }
     if(result.length>0){
         return res.render('register',{
-            message:'That email is already in use'
+            message:'Такой логин уже используется, попробуйте другой!'
         })
     }
   let hashed=await bcrypt.hash(password,7)
@@ -80,7 +84,7 @@ connection.query('select login from spr.user where login=?',[login], async (err,
     connection.query('Insert into user Set ?',{login:login,password:hashed},(err,result)=>{
         if(!err){
             res.render('index',{
-                message:"You've been succesfully register!"
+                message:"Вы успешно зарегистрированы!"
             })
         }
         else{

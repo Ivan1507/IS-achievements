@@ -20,3 +20,9 @@ td {
 th:first-child, td:first-child {
     text-align: left;
 }
+.btn-danger{
+   background-color:crimson;
+}
+.btn-success {
+    background-color: #50d9ca;
+}

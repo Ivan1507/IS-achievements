@@ -2,10 +2,16 @@
   <div class="nav-wrapper">
     <a href="/" class="brand-logo">Logo</a>
     <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <li><a href="/achivments">Achivments</a></li>
-      <li><a href="/auth/login">Login</a></li>
-      <li><a href="/auth/register">Register</a></li>
-      <li><a href="/auth/logout">Logout</a></li>
+      {{#if isLogout}}
+        <li><a href="/auth/login">Войти</a></li>
+        <li><a href="/auth/register">Зарегистрироваться</a></li>
+        {{else}}
+        <li><a href="/achievements">Достижения</a></li>
+        <li><a href="/participate">Сводная таблица</a></li>
+        <li><a href="/participant">Участники</a></li>
+        <li><a href="/auth/logout">Выйти</a></li>
+      {{/if}}
     </ul>
   </div>
 </nav>
+
