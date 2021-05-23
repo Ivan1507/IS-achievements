@@ -1,0 +1,25 @@
+{{#if msg.length}}
+  <p class="card-panel teal lighten-2">{{msg}}</p>
+{{/if}}
+
+{{#if Achievements.length}}
+  <table>
+    <tr class="paint_tab">
+      <th>Название</th>
+      <th>Дата</th>
+      <th>Тип</th>
+    </tr>
+    {{#each Achievements}}
+      <tr class="paint_tab">
+        <td><a href="participate/edit/{{achiv_id}}">{{name}}</a></td>
+        <td>{{date}}</td>
+        <td>{{type}}</td>
+      </tr>
+    {{/each}}
+  </table>
+{{else}}
+  <p>Пока нет достижений!!!</p>
+{{/if}}
+
+
+

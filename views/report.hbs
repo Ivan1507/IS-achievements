@@ -1,0 +1,118 @@
+<html>
+<head>
+  <!--Load the AJAX API-->
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+
+    google.charts.load('current', {packages: ['corechart', 'bar']});
+    google.charts.setOnLoadCallback(drawBasic);
+
+    function drawBasic() {
+
+      var data = google.visualization.arrayToDataTable([
+        ['Фамилия', 'Кол-во достижений',],
+        {{#each Participants}}
+          ["{{FIO}}",{{C_ach}}],
+        {{/each}}
+      ]);
+
+      var options = {
+
+        chartArea: {width: '50%'},
+        hAxis: {
+          title: 'Достижения по участникам',
+          minValue: 0
+        },
+        vAxis: {
+          title: 'Фамилия'
+        }
+      };
+
+      var chart = new google.visualization.BarChart(document.getElementById('chart_div3'));
+
+      chart.draw(data, options);
+    }
+
+    let c=[]
+    let i=0
+      {{#each Achievements}}
+        {{#if date}}
+          c[i]=true
+          {{else}}
+          c[i]=false
+        {{/if}}
+        i++;
+      {{/each}}
+    let k=false
+    for(let i=0;i<c.length;i++){
+        if(c[i]) k=true
+    }
+   if(k) {
+     google.charts.load('current', {'packages': ['corechart']});
+     google.charts.setOnLoadCallback(drawChart);
+
+     function drawChart() {
+
+       var data = google.visualization.arrayToDataTable([
+         ['Year', 'Участников'],
+         {{#each Achievements}}
+           {{#if date}}
+             ["{{date}}",{{C_ach}}],
+           {{/if}}
+         {{/each}}
+       ]);
+
+       var options = {
+         title: 'Достижения по дате',
+         curveType: 'function',
+         legend: {position: 'bottom'}
+       };
+
+       var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+       chart.draw(data, options);
+     }
+   }
+   else{
+       const for_message=document.getElementById('for_message')
+      for_message.innerText="За данный период пока нет достижений!"
+     for_message.className="card-panel purple lighten 1 msg"
+   }
+
+  </script>
+</head>
+
+<body>
+<!--Div that will hold the dashboard-->
+
+
+<div id="chart_div3">
+  <!--Divs that will hold each control and chart-->
+</div>
+
+
+<h2 class="text-center">Достижения по дате</h2>
+{{# if errs.length}}
+  <ul>
+    {{#each errs}}
+      <li>
+        <p class="card-panel purple lighten 1"><span class="msg">{{msg}}</span></p>
+      </li>
+    {{/each}}
+
+  </ul>
+{{/if}}
+<form  action="/reports" method="post">
+  <label>Выберите дату</label>
+  <input type="date" value="{{date}}" class="field" name="date">
+
+  <input type="submit" class="btn center field" value="Выбрать">
+</form>
+<br>
+
+<div id="curve_chart">
+  <!--Divs that will hold each control and chart-->
+</div>
+
+</body>
+</html>

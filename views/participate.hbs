@@ -1,25 +1,45 @@
-{{#if msg.length}}
-  <p class="card-panel teal lighten-2">{{msg}}</p>
-{{/if}}
-<h1>Сводка достижений</h1>
+
 {{#if Achievements.length}}
   <table>
-    <tr>
-      <th>Название</th>
-      <th>Дата</th>
-      <th>Тип</th>
+    <tr class="paint_tab">
+      <th>ФИО</th>
+      <th>Позиция</th>
+      <th class="center">Ссылка на профиль</th>
+      <th>Операция</th>
     </tr>
     {{#each Achievements}}
-      <tr>
-        <th><a href="participate/edit/{{achiv_id}}">{{name}}</a></th>
-        <th>{{date}}</th>
-        <th>{{type}}</th>
+      <tr class="paint_tab">
+        <td>{{FIO}}</td>
+        <td>{{Position}}</td>
+        {{#if link.length}}
+          <td><a href="/{{link}}">{{link}}</a></td>
+        {{else}}
+          <td>Отсутствует</td>
+        {{/if}}
+        <td>
+          <form action="/participate/edit/{{part_id}}" method="POST" style="display:inline;">
+            <input type="hidden" name="_id" value="{{achiv_id}}">
+            <input onclick="const c=confirm('Вы действительно хотите открепить данного участника от этого достижения?')
+           if(!c) return event.preventDefault() " class='btn btn-danger' type="submit" value="Убрать" />
+          </form>
+        </td>
       </tr>
     {{/each}}
   </table>
 {{else}}
-  <p>Пока нет достижений!!!</p>
+  <p>У этого достижения пока нет участников!</p>
 {{/if}}
 
-
-
+<h4>Выберите участников:</h4>
+<div class="additions">
+<ol>
+  {{#each Participants}}
+    <li>{{FIO}}/{{Position}}<button class="btn btn-add center" name="addtoPart" value="{{part_id}}">Выбрать</button></li>
+    <br>
+  {{/each}}
+</ol>
+</div>
+<form action="/participate/add/{{achiv_id}}" method="post">
+  <input type="hidden"  name="part_id" id="part_id" value="">
+  <input type="submit" class="btn blue " value="Сохранить">
+</form>

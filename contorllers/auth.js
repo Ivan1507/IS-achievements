@@ -7,7 +7,13 @@ const config=require('../config/db.config')
 
 const connection = mysql.createConnection(config);
 
-
+const generateAccessToken=(id,roles)=>{
+    const payload={
+        id,
+        roles
+    }
+    return jwt.sign(payload,process.env.JWT_SECRET,{expiresIn:"24h"})
+}
 exports.login=(req,res)=>{
     try{
         const {login,password}=req.body
@@ -35,23 +41,12 @@ exports.login=(req,res)=>{
                 })
             }
         else{
-            const id=results[0].id
-
-            const token=jwt.sign({id},process.env.JWT_SECRET,{
-                expiresIn:process.env.JWT_EXPIRES_IN
-            })
 
 
-                const cookieoptions={
-                expires:new Date(
-                    Date.now()+process.env.JWT_COOKIE_EXPIRES*24*60*60
-                ),
-                    httpOnly:true
-                }
+                const token=generateAccessToken(results[0].id,results[0].role)
 
-                res.cookie('jwt',token,cookieoptions)
+                res.cookie('jwt',token)
                 res.redirect('/')
-
             }
         })
 
@@ -64,9 +59,9 @@ exports.login=(req,res)=>{
 
 exports.register=(req,res)=>{
 const {login,password}=req.body;
-if(login.length<5||password.length<5){
+if(login.length<4||password.length<4){
     res.render('register',{
-        error:"Логин и пароль должны быть длинее 4 символов!"
+        error:"Логин и пароль должны быть длинее 3 символов!"
     })
     return
 }
@@ -81,7 +76,7 @@ connection.query('select login from spr.user where login=?',[login], async (err,
     }
   let hashed=await bcrypt.hash(password,7)
     console.log(hashed)
-    connection.query('Insert into user Set ?',{login:login,password:hashed},(err,result)=>{
+    connection.query('Insert into user Set ?',{login:login,password:hashed,role:"user"},(err,result)=>{
         if(!err){
             res.render('index',{
                 message:"Вы успешно зарегистрированы!"

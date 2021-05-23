@@ -1,16 +1,29 @@
 
+<style>
+  .msg{
+    color: #f5f3f3;
+  }
+  .center{
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+  }
+  .text-center {
+    text-align: center !important;
+  }
+</style>
+
 {{# if errs.length}}
   <ul>
     {{#each errs}}
       <li>
-        <p class="card-panel teal lighten-2">{{msg}}</p>
+        <p class="card-panel red"><span class="msg">{{msg}}</span></p>
       </li>
     {{/each}}
 
   </ul>
 {{/if}}
 
-  <h1>{{title}}</h1>
   <form action="/achievements/add" method="POST">
     <input type="hidden" name="id"  />
     <label for="name">Название</label><br>
@@ -21,6 +34,6 @@
     <input name="type"  class="field" /><br><br>
     <label>Описание</label><br>
     <input name="description"  class="field" /><br><br>
-    <input type="submit" class="btn" value="Отправить" />
+    <input type="submit" class="btn center" value="Добавить" />
   </form>
 

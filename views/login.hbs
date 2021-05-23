@@ -1,5 +1,11 @@
+<style>
+  .text-center{
+    text-align: center !important;
+  }
+</style>
+
 {{#if message}}
-  <h3>{{message}}</h3>
+  <h3 class="text-center">{{message}}</h3>
 {{/if}}
 <form action="/auth/login" method="post">
         <div>
@@ -11,6 +17,6 @@
             <input type='password' id="password" name="password">
         </div>
         <div>
-            <button type="submit" class="btn">Submit</button>
+            <button type="submit" class="btn">Войти</button>
         </div>
     </form>

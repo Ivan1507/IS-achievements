@@ -1,15 +1,17 @@
-
+<!DOCTYPE html>
 <html>
 {{> head}}
-<link href="styles.css" rel="stylesheet">
+
 <body>
 {{> navbar}}
-<div  id="app" class="container">
+<div class="container">
+  {{#if isDateEntered}}
+  <p id="for_message" ></p>
+{{/if}}
+  <h1 class="text-center">{{title}}</h1>
   {{{body}}}
 </div>
-<script src="https://unpkg.com/vue@next"></script>
-<script src="vue">
-</script>
+<script src="/script.js"></script>
 </body>
 </html>
 

@@ -1,0 +1,24 @@
+
+{{#each Achievements}}
+  <div class="col s12 m7">
+    <h2 class="header center">{{name}}</h2>
+    <div class="card horizontal medium">
+      <div class="card-image">
+        <img src="/{{certificate}}">
+      </div>
+      <div class="card-stacked">
+        <div class="card-content">
+          <span class="content">
+          <p>Дата достижения: {{date}}</p>
+        <br>
+          <p>Описание: {{description}}</p>
+          </span>
+        </div>
+        <div class="card-action">
+          <a href="/news/{{achiv_id}}">Подробнее</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{{/each}}

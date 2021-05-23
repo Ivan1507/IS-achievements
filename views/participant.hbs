@@ -1,0 +1,23 @@
+
+
+{{# if errs.length}}
+  <ul>
+    {{#each errs}}
+      <li>
+        <p class="card-panel purple "><span class="msg">{{msg}}</span></p>
+      </li>
+    {{/each}}
+
+  </ul>
+{{/if}}
+
+<form action="/participants/edit/{{Participant.part_id}}" method="POST">
+  <input type="hidden" name="id" value="{{Participant.part_id}}" />
+  <label for="FIO">ФИО</label><br>
+  <input name="FIO" value="{{Participant.FIO}}"  class="field" /><br><br>
+  <label>Должность </label><br>
+  <input name="position"  value="{{Participant.Position}}"  class="field" /><br><br>
+  <label>Ссылка на профиль</label><br>
+  <input name="link" value="{{Participant.link}}"  class="field" /><br><br>
+  <input type="submit" class="btn center" value="Сохранить" />
+</form>

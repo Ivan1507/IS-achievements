@@ -1,14 +1,16 @@
 <nav class="blue darker-4">
   <div class="nav-wrapper">
-    <a href="/" class="brand-logo">Logo</a>
+    <a href="/" class="brand-logo" style="margin-left: 15px">Logo</a>
     <ul id="nav-mobile" class="right hide-on-med-and-down">
       {{#if isLogout}}
+        <li><a href="/news">Новости</a></li>
         <li><a href="/auth/login">Войти</a></li>
         <li><a href="/auth/register">Зарегистрироваться</a></li>
         {{else}}
         <li><a href="/achievements">Достижения</a></li>
         <li><a href="/participate">Сводная таблица</a></li>
-        <li><a href="/participant">Участники</a></li>
+        <li><a href="/participants">Участники</a></li>
+        <li><a href="/reports">Отчёты</a></li>
         <li><a href="/auth/logout">Выйти</a></li>
       {{/if}}
     </ul>

@@ -1,0 +1,34 @@
+
+<button class="btn btn-success"><a href="/participants/add">Добавить</a></button>
+<br><br>
+{{#if Participants.length}}
+  <table>
+    <tr class="paint_tab">
+      <th>ФИО</th>
+      <th>Должность</th>
+      <th>Ссылка на профиль</th>
+      <th>Операция</th>
+    </tr>
+    {{#each Participants}}
+      <tr class="paint_tab">
+        <td><a href="/participants/edit/{{part_id}}">{{FIO}}</a></td>
+        <td>{{Position}}</td>
+        {{#if link.length}}
+          <td><a href="{{link}}">{{link}}</a></td>
+        {{else}}
+          <td>Отсутствует</td>
+        {{/if}}
+        <td>
+          <form action="/participants/delete/{{part_id}}" method="POST" style="display:inline;">
+            <input onclick="const c=confirm('Вы действительно хотите удалить этого участника?')
+           if(!c) return event.preventDefault() " class='btn btn-danger' type="submit" value="Удалить" />
+          </form>
+        </td>
+      </tr>
+    {{/each}}
+  </table>
+{{else}}
+  <p>Пока нет участников!!!</p>
+{{/if}}
+
+

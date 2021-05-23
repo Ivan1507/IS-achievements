@@ -4,18 +4,22 @@ table {
     border-collapse: collapse;
     text-align: center;
 }
-th, td:first-child {
-    background: #AFCDE7;
-    color: white;
+th{
+    font-weight: 900!important;
+    color: black;
     padding: 10px 20px;
 }
+tr.paint_tab:nth-child(n) {
+    background-color: #8ea7e0 !important;
+}
+tr.paint_tab:nth-child(2n) {
+    background-color:#adc7ef !important;
+}
+
 th, td {
     border-style: solid;
     border-width: 0 1px 1px 0;
     border-color: white;
-}
-td {
-    background: #D8E6F3;
 }
 th:first-child, td:first-child {
     text-align: left;
@@ -25,4 +29,24 @@ th:first-child, td:first-child {
 }
 .btn-success {
     background-color: #50d9ca;
+
+    font-weight: bold !important;
+}
+.text-center{
+    text-align: center !important;
+}
+a{
+    color:white;
+}
+.center{
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+}
+.msg{
+    color: #f5f3f3;
+}
+.content{
+    font-weight: bold;
+    font-size: 17px;
 }
