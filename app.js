@@ -21,13 +21,29 @@ app.use(uploadFiles())
 app.use(express.static('public'))
 app.use(express.static('scripts'))
 app.use(express.static('upload'))
-app.engine('hbs',exhbs({extname:'.hbs'}))
+const hbs=exhbs.create({
+    defaultLayout:'main',
+    extname:'hbs',
+    helpers:{
+        _if: function (a,b,options) {
 
+
+        },
+        viewersCount:function(viewer){
+
+            return (viewer.length||0);
+        },
+        Calculation:function (value){
+            return value*5;
+        }
+    }
+})
+app.engine('hbs',hbs.engine)
+app.set('view engine','hbs')
+app.set('views','views')
 
 
 app.use(cookieParser())
-app.set('view engine','hbs')
-app.set('views','views')
 app.use(body.urlencoded({ extended: false }));
 app.use(body.json());
 app.use('/participate',authMiddle,participate)

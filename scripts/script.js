@@ -5,3 +5,4 @@ for(let i=0;i<adds.length;i++){
         part_id.value=adds[i].attributes.value.value
     }
 }
+

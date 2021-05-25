@@ -5,5 +5,20 @@
 </div>
 
 <p class="content">Дата достижения: {{Achievement.date}} <br>
-  Описание: {{Achievement.description}}</p>
+  Описание: {{Achievement.description}} <br>
+{{#if Participants}}
+  В мероприятии принимали участие:
+  {{#each Participants}}
+    {{FIO}},
+  {{/each}}
+  {{else}}
+  К мероприятию пока не прикреплены участники!
+  {{/if}}
+</p>
+
+<script>
+
+</script>
+
+
 

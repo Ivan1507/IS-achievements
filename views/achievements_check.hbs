@@ -1,6 +1,5 @@
 
 <button class="btn btn-success"><a href="/achievements/add">Добавить</a></button>
-<button class="btn purple f-b"><a href="/achievements/check">Утвердить</a></button>
 <br><br>
 {{#if Achievements.length}}
   <table>
@@ -12,14 +11,14 @@
     </tr>
     {{#each Achievements}}
       <tr class="paint_tab">
-        <td class="text-center"><a href="/achievements/edit/{{achiv_id}}">{{name}}</a></td>
+        <td class="text-center"><a href="/achievements/check/{{achiv_id}}">{{name}}</a></td>
         <td class="text-center">{{date}}</td>
         <td class="text-center">{{description}}</td>
         <td class="text-center">
-        <form action="/achievements/delete/{{achiv_id}}" method="POST" style="display:inline;">
-          <input onclick="const c=confirm('Вы действительно хотите удалить эту запись?')
+          <form action="/achievements/delete/{{achiv_id}}" method="POST" style="display:inline;">
+            <input onclick="const c=confirm('Вы действительно хотите удалить эту запись?')
            if(!c) return event.preventDefault() " class='btn btn-danger' type="submit" value="Удалить" />
-        </form>
+          </form>
         </td>
       </tr>
     {{/each}}

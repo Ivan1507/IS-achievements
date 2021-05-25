@@ -17,14 +17,14 @@
   <ul>
     {{#each errs}}
       <li>
-        <p class="card-panel red"><span class="msg">{{msg}}</span></p>
+        <p class="card-panel purple"><span class="msg">{{msg}}</span></p>
       </li>
     {{/each}}
 
   </ul>
 {{/if}}
 
-  <form action="/achievements/add" method="POST">
+  <form action="/achievements/add" method="POST" enctype="multipart/form-data">
     <input type="hidden" name="id"  />
     <label for="name">Название</label><br>
     <input name="name"  class="field" /><br><br>
@@ -34,6 +34,8 @@
     <input name="type"  class="field" /><br><br>
     <label>Описание</label><br>
     <input name="description"  class="field" /><br><br>
+    <label>Сертификат</label><br>
+    <input type="file" name="certificate" value="{{Achievement.certificate}}" accept="/image/*" class="field" />
     <input type="submit" class="btn center" value="Добавить" />
   </form>
 
